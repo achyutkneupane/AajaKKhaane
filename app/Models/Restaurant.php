@@ -26,4 +26,12 @@ class Restaurant extends Model
     {
         return $this->hasMany(Visit::class);
     }
+
+    /**
+     * Votes
+     */
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }

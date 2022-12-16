@@ -48,5 +48,13 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
+    /**
+     * Votes
+     */
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
 
 }
