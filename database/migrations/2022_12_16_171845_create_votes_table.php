@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('user_id');
-            $table->boolean('is_present')->default('true');
+            $table->boolean('is_present')->default(true);
             $table->dateTime('voted_at');
             $table->timestamps();
         });
