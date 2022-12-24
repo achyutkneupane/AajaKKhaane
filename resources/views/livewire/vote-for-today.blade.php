@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Vote for Today</div>
+                <div class="card-header">Aaja Kaa khaane?</div>
 
                 <div class="card-body">
                     @if($votedForToday)
@@ -11,7 +11,7 @@
                                 <div href="#" class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">{{ $vote['restaurant'] }}</h5>
-                                        <small>{{ $vote['votes'] }} vote{{ $vote['votes'] > 1 ? 's' : '' }}</small>
+                                        {{-- <small>{{ $vote['votes'] }} vote{{ $vote['votes'] > 1 ? 's' : '' }}</small> --}}
                                         <div>{{ $vote['percentage'] }}%</div>
                                     </div>
                                 </div>
