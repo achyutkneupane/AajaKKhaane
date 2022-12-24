@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\VoteForToday;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// middleware auth route group
+Route::middleware(['auth'])->group(function () {
+    Route::get('/vote', VoteForToday::class)->name('vote');
+});

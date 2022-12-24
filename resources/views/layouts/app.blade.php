@@ -15,6 +15,10 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    @auth
+        @livewireStyles()
+    @endauth
 </head>
 <body>
     <div id="app">
@@ -73,8 +77,15 @@
         </nav>
 
         <main class="py-4">
+            @guest
             @yield('content')
+            @else
+            {{ $slot }}
+            @endguest
         </main>
     </div>
+    @auth
+        @livewireScripts()
+    @endauth
 </body>
 </html>
