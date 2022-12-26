@@ -13,14 +13,16 @@ class VoteForToday extends Component
     public $votesForToday;
     public $votedForToday;
     public $voteCollect;
+    public $voting = false;
 
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
 
     public function mount()
     {
-        $this->restaurants = Restaurant::where('is_active', true)->get();
+        //
     }
     public function voteForToday() {
+        $this->voting = true;
         $this->validate([
             'restaurant' => 'required|exists:restaurants,id'
         ]);
@@ -38,9 +40,11 @@ class VoteForToday extends Component
         $this->restaurant = "";
 
         event(new \App\Events\SomeoneVoted);
+        $this->voting = false;
     }
     public function render()
     {
+        $this->restaurants = Restaurant::where('is_active', true)->get();
         $this->votedForToday = auth()->user()->votes()->where('voted_at', '>=', today())->exists();
         $this->votesForToday = Vote::where('voted_at', '>=', today())->get();
         $this->voteCollect = collect();
@@ -48,7 +52,7 @@ class VoteForToday extends Component
             if ($this->votesForToday->where('restaurant_id', $restaurant->id)->count() > 0) {
                 $this->voteCollect->push([
                     'restaurant' => $restaurant->name,
-                    // 'votes' => $this->votesForToday->where('restaurant_id', $restaurant->id)->count(),
+                    'votes' => $this->votesForToday->where('restaurant_id', $restaurant->id)->count(),
                     'percentage' => round($this->votesForToday->where('restaurant_id', $restaurant->id)->count() / $this->votesForToday->count() * 100, 2)
                 ]);
             }
