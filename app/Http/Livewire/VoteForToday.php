@@ -53,6 +53,9 @@ class VoteForToday extends Component
                 $this->voteCollect->push([
                     'restaurant' => $restaurant->name,
                     'votes' => $this->votesForToday->where('restaurant_id', $restaurant->id)->count(),
+                    'voter_names' => $this->votesForToday->where('restaurant_id', $restaurant->id)->pluck('user.name')->map(function($name) {
+                        return explode(' ', $name)[0];
+                    })->implode(', '),
                     'percentage' => round($this->votesForToday->where('restaurant_id', $restaurant->id)->count() / $this->votesForToday->count() * 100, 2)
                 ]);
             }

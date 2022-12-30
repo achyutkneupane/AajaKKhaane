@@ -15,6 +15,9 @@
                                         <strong class="fs-6 fw-bolder">{{ $vote['percentage'] }}%</strong>
                                     </div>
                                 </div>
+                                <div class="text-muted mb-3">
+                                    {{ $vote['voter_names'] }}
+                                </div>
                             @endforeach
                         </div>
                     @else

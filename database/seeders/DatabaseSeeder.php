@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
         }
 
         if (app()->environment('production')) {
-            // Cottege, Wawa, Kalinchowk, Naan, Burger Club, Syanko
+            // Cottage, Wawa, Kalinchowk, Naan, Burger Club, Syanko
             \App\Models\Restaurant::insert([[
-                    'name' => 'Cottege',
+                    'name' => 'Cottage',
                     'phone' => '',
                     'created_at' => now(),
                     'updated_at' => now()
