@@ -5,7 +5,13 @@
                 <div class="card-header">Aaja Kaa khaane?</div>
 
                 <div class="card-body">
-                    @if ($votedForToday)
+                    @if ($votedForToday || !auth()->user()->hasPermissionTo('can vote'))
+                        @if (!auth()->user()->hasPermissionTo('can vote'))
+                        <div class="alert alert-warning">
+                            You don't have permission to vote.
+                        </div>
+                        @endif
+
                         <div class="list-group">
                             @foreach ($voteCollect->sortByDesc('votes') as $vote)
                                 <h5 class="mb-1">{{ $vote['restaurant'] }}</h5>

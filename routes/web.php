@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\AdminPanel;
 use App\Http\Livewire\VoteForToday;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,9 @@ Auth::routes();
 // middleware auth route group
 Route::middleware(['auth'])->group(function () {
     Route::get('/vote', VoteForToday::class)->name('vote');
+});
+
+// role admin middleware
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', AdminPanel::class)->name('admin-panel');
 });
