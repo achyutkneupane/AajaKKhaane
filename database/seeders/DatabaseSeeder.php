@@ -77,48 +77,65 @@ class DatabaseSeeder extends Seeder
                     "email" => "achyutkneupane@gmail.com",
                     "password" => Hash::make("Ghost0vperditi0n"),
                     "username" => "achyut",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Labham Ronier",
                     "email" => "labhamrauniyar@gmail.com",
                     "password" => Hash::make("Labham@123"),
                     "username" => "labham",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Aditi Tamrakar",
                     "email" => "tamrakaraditi16@gmail.com",
                     "password" => Hash::make("Aditi@123"),
                     "username" => "aditi",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Pratit Shrestha",
                     "email" => "pratitstha667@gmail.com",
                     "password" => Hash::make("Pratit@123"),
                     "username" => "pratit",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Utsav Shrestha",
                     "email" => "aavesh1234@gmail.com",
                     "password" => Hash::make("Utsav@123"),
                     "username" => "utsav",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Aaryan Poudel",
                     "email" => "aaryan.poudel1@gmail.com",
                     "password" => Hash::make("Aaryan@123"),
                     "username" => "aaryan",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Anushka Shrestha",
                     "email" => "shresthaanushka105@gmail.com",
                     "password" => Hash::make("Anushka@123"),
                     "username" => "anushka",
+                    "status" => false,
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Riyaz KC",
                     "email" => "riyazkc98@gmail.com",
                     "password" => Hash::make("Riyaz@123"),
                     "username" => "riyaz",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ]
             ];
 
