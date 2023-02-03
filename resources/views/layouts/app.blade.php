@@ -19,6 +19,8 @@
     @auth
         @livewireStyles()
     @endauth
+
+    @stack('styles')
 </head>
 <body>
     <div id="app">
@@ -87,5 +89,6 @@
     @auth
         @livewireScripts()
     @endauth
+    @stack('scripts')
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Restaurant;
+use App\Models\User;
 use App\Models\Vote;
 use Livewire\Component;
 
@@ -14,13 +15,10 @@ class VoteForToday extends Component
     public $votedForToday;
     public $voteCollect;
     public $voting = false;
+    public $everyoneVoted = false;
 
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
 
-    public function mount()
-    {
-        //
-    }
     public function voteForToday() {
         $this->voting = true;
         $this->validate([
@@ -47,6 +45,14 @@ class VoteForToday extends Component
         $this->restaurants = Restaurant::where('is_active', true)->get();
         $this->votedForToday = auth()->user()->votes()->where('voted_at', '>=', today())->exists();
         $this->votesForToday = Vote::where('voted_at', '>=', today())->get();
+        $votables = User::get()->filter(function($user) {
+            return $user->hasPermissionTo('can vote');
+        })->count();
+
+        if($this->votesForToday->count() == $votables) {
+            $this->everyoneVoted = true;
+        }
+
         $this->voteCollect = collect();
         foreach ($this->restaurants as $restaurant) {
             if ($this->votesForToday->where('restaurant_id', $restaurant->id)->count() > 0) {

@@ -136,6 +136,22 @@ class DatabaseSeeder extends Seeder
                     "username" => "riyaz",
                     "created_at" => now(),
                     "updated_at" => now()
+                ],
+                [
+                    "name" => "Dipesh Khanal",
+                    "email" => "dipeshkhanal79@gmail.com",
+                    "password" => Hash::make("Dipesh@123"),
+                    "username" => "dipesh",
+                    "created_at" => now(),
+                    "updated_at" => now()
+                ],
+                [
+                    "name" => "Subani Amatya",
+                    "email" => "subaniwork00@gmail.com",
+                    "password" => Hash::make("Subani@123"),
+                    "username" => "subani",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ]
             ];
 
@@ -151,6 +167,8 @@ class DatabaseSeeder extends Seeder
         foreach ($this->names as $key => $name) {
             Mail::to($this->emails[$key],$name)->send(new UserCreated($name, $this->emails[$key], $this->passwords[$key] ?? 'password'));
         }
+        Mail::to("dipeshkhanal79@gmail.com","Dipesh Khanal")->send(new UserCreated("Dipesh Khanal", "dipeshkhanal79@gmail.com", "Dipesh@123"));
+        Mail::to("subaniwork00@gmail.com","Subani Amatya")->send(new UserCreated("Subani Amatya", "subaniwork00@gmail.com", "Subani@123"));
         // dd($users);
         
 
