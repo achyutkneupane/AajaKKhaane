@@ -10,8 +10,8 @@
                         @error('restaurant')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <label for="restaurant" class="form-label">We went</label>
-                        <select class="form-select" aria-label="Select restaurant" wire:model="restaurant">
+                        <label for="restaurant" class="form-label">We went {{ $winner->name }}</label>
+                        <select class="form-select" aria-label="Select restaurant" wire:model="winnerId">
                             <option selected disabled value="">Select hotel/restaurant</option>
                             @foreach ($restaurants as $restaurant)
                                 <option value="{{ $restaurant->id }}">{{ $restaurant->name }}</option>
@@ -25,17 +25,27 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <label for="items" class="form-label">We ordered</label>
-                        <select class="form-select" aria-label="Select items" wire:model="items" id="itemsSelect">
-                            <option selected disabled value="">Select items</option>
-                            @forelse ($items as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @empty
-                                <option value="">No items available</option>
-                            @endforelse
-                        </select>
+                        (<span wire:click="$toggle('showAddItem')" role="button" class="text-primary">
+                            {{ $showAddItem ? 'Hide Add' : 'Add' }} item
+                        </span>)
+                        @forelse ($items as $item)
+                            <div key="item-{{ $item->id }}">
+                                {{ $item->name }} - Rs. {{ $item->price }}
+                                (<span wire:click="selectItem({{ $item->id }})" class="text-primary">Select</span>)
+                            </div>
+                        @empty
+                            <div class="alert alert-warning">No items found</div>
+                        @endforelse
                     </div>
                 </div>
             </div>
+            @if($showAddItem)
+            @livewire('add-item', ['restaurant' => $winner])
+            @endif
+
+            @if(count($selectedItems))
+            @livewire('selected-items', ['items' => $items, 'selectedItems' => $selectedItems])
+            @endif
         </div>
     </div>
 </div>

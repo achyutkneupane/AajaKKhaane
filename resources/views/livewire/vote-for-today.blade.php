@@ -55,14 +55,14 @@
                 </div>
             </div>
 
-            <div class="text-center mt-3">
+            {{-- <div class="text-center mt-3">
                 @if (auth()->user()->hasRole('admin'))
                     <a href="{{ route('admin-panel') }}" class="btn btn-link">Admin Panel</a>
                 @endif
                 @if (auth()->user()->hasAnyRole(['admin', 'om']))
                     <a href="{{ route('om-panel') }}" class="btn btn-link">Split Bill</a>
                 @endif
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
