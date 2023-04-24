@@ -57,11 +57,10 @@ class VoteForToday extends Component
         $this->items = Item::where('is_active', true)->get();
         $this->votedForToday = auth()->user()->votes()->where('voted_at', '>=', today())->exists();
         $this->votesForToday = Vote::where('voted_at', '>=', today())->get();
-//        $votables = User::get()->filter(function($user) {
-//            return $user->hasPermissionTo('can vote');
-//        })->count();
+        $votables = User::get()->filter(function($user) {
+            return !$user->notEatingToday();
+        })->count();
 
-        $votables = User::count();
 
         if($this->votesForToday->count() == $votables) {
             $this->everyoneVoted = true;

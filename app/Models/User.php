@@ -80,7 +80,7 @@ class User extends Authenticatable
         if($this->isRegular()) {
             return $this->logs()->whereDate('absent_at', today())->exists();
         } else {
-            return true;
+            return !$this->logs()->whereDate('absent_at', today())->exists();
         }
     }
 
