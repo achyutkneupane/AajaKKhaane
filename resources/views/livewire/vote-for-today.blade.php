@@ -49,7 +49,9 @@
                                             <option value="{{ $loopItem->id }}">{{ $loopItem->name }}</option>
                                         @endforeach
                                     </select>
-                                    <div class="form-text">You can vote only once a day.</div>
+                                    <div class="form-text fs-5">
+                                        प्लिज वाश योर ओन् टिफिन बक्स
+                                    </div>
                                 </div>
                                 <button type="button" class="btn btn-primary"
                                         wire:click="voteForToday" {{ $voting ? 'disabled' : '' }}>

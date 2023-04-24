@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public $users, $passwords, $names, $emails;
+
     public function run()
     {
         if (app()->environment('local')) {
@@ -145,12 +146,33 @@ class DatabaseSeeder extends Seeder
                     "name" => "Pranish Shakya",
                     "email" => "ppranish1998@gmail.com",
                     "username" => "pranish",
+                ],
+                [
+                    "name" => "Geeta Ojha",
+                    "email" => "grisaojha21@gmail.com",
+                    "username" => "geeta"
+                ],
+                [
+                    "name" => "Madhavi Neupane",
+                    "email" => "neupanem206@gmail.com",
+                    "username" => "madhavi",
+                ],
+                [
+                    "name" => "Roshan Shrestha",
+                    "email" => "hello@theroshan.com",
+                    "username" => "roshan",
+                ],
+                [
+                    "name" => "Tshitiz Rajkarnikar",
+                    "email" => "tshitiz@25hours.live",
+                    "username" => "tshitiz",
                 ]
             ];
         }
 
         // Mail::to('')
         foreach ($this->users as $key => $item) {
+            $item['password'] = Hash::make('password');
             User::firstOrCreate($item);
 //            Mail::to($this->emails[$key],$name)->send(new UserCreated($name, $this->emails[$key], $this->passwords[$key] ?? 'password'));
             Mail::to($item['email'], $item['name'])->queue(new UserCreated($item['name'], $item['email'], 'password'));
@@ -163,11 +185,7 @@ class DatabaseSeeder extends Seeder
             'guard_name' => 'web'
         ]);
 
-        User::where('username','achyut')->first()->assignRole('admin');
-        User::where('username','aaryan')->first()->assignRole('admin');
-
-
-
-
+        User::where('username', 'achyut')->first()->assignRole('admin');
+        User::where('username', 'aaryan')->first()->assignRole('admin');
     }
 }

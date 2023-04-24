@@ -12,5 +12,6 @@ Details:
 Login
 </x-mail::button>
 
-Thanks,
+Thanks,<br />
+{{ config('app.name') }}
 </x-mail::message>
