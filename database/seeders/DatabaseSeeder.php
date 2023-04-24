@@ -78,11 +78,15 @@ class DatabaseSeeder extends Seeder
                     "name" => "Achyut Neupane",
                     "email" => "achyutkneupane@gmail.com",
                     "username" => "achyut",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Labham Ronier",
                     "email" => "labhamrauniyar@gmail.com",
                     "username" => "labham",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Aditi Tamrakar",
@@ -93,16 +97,22 @@ class DatabaseSeeder extends Seeder
                     "name" => "Pratit Shrestha",
                     "email" => "pratitstha667@gmail.com",
                     "username" => "pratit",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Utsav Shrestha",
                     "email" => "aavesh1234@gmail.com",
                     "username" => "utsav",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
                 [
                     "name" => "Aaryan Poudel",
                     "email" => "aaryan.poudel1@gmail.com",
                     "username" => "aaryan",
+                    "created_at" => now(),
+                    "updated_at" => now()
                 ],
 //                [
 //                    "name" => "Anushka Shrestha",
