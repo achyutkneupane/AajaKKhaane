@@ -6,7 +6,7 @@
 
                 <form class="card-body" wire:submit.prevent="SaveItem">
                     @if($success)
-                        <div class="alert alert-success">
+                        <div class="text-success">
                             {{ $success }}
                         </div>
                     @endif
