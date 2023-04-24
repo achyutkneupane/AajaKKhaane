@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Item;
 use App\Models\Restaurant;
 use Livewire\Component;
 
@@ -9,28 +10,21 @@ class AddItem extends Component
 {
     public $restaurant;
     public $name, $price;
+    public $success;
     protected $listeners = ['forAddItem' => 'updateRestaurant'];
-    public function mount(Restaurant $restaurant)
-    {
-        $this->restaurant = $restaurant;
-    }
-    public function updateRestaurant(Restaurant $restaurant)
-    {
-        $this->restaurant = $restaurant;
-    }
     public function SaveItem()
     {
         $this->validate([
             'name' => 'required',
-            'price' => 'required|numeric',
         ]);
-        $this->restaurant->items()->create([
+        Item::create([
             'name' => $this->name,
-            'price' => $this->price,
+            'price' => 135,
         ]);
-        $this->emitTo('bill-split','updateItems');
         $this->name = '';
         $this->price = '';
+//        success message
+        $this->success = 'Item added successfully';
     }
     public function render()
     {

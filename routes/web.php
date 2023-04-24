@@ -30,8 +30,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // role admin middleware
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin', AdminPanel::class)->name('admin-panel');
+    Route::get('/add-item', \App\Http\Livewire\AddItem::class)->name('add-item');
 });
 
 // role om middleware
