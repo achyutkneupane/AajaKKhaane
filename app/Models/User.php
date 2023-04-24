@@ -57,5 +57,13 @@ class User extends Authenticatable
         return $this->hasMany(Vote::class);
     }
 
+    /**
+     * Not Eating Logs
+     */
+    public function logs()
+    {
+        return $this->hasMany(AbsentLog::class);
+    }
+
 
 }

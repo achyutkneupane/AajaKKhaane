@@ -5,9 +5,11 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Mail\UserCreated;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -75,50 +77,32 @@ class DatabaseSeeder extends Seeder
                 [
                     "name" => "Achyut Neupane",
                     "email" => "achyutkneupane@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "achyut",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ],
                 [
                     "name" => "Labham Ronier",
                     "email" => "labhamrauniyar@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "labham",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ],
                 [
                     "name" => "Aditi Tamrakar",
                     "email" => "tamrakaraditi16@gmail.com",
-                    "password" => Hash::make("password"),
-                    "username" => "aditi",
-                    "created_at" => now(),
-                    "updated_at" => now()
+                    "username" => "aditi"
                 ],
                 [
                     "name" => "Pratit Shrestha",
                     "email" => "pratitstha667@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "pratit",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ],
                 [
                     "name" => "Utsav Shrestha",
                     "email" => "aavesh1234@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "utsav",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ],
                 [
                     "name" => "Aaryan Poudel",
                     "email" => "aaryan.poudel1@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "aaryan",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ],
 //                [
 //                    "name" => "Anushka Shrestha",
@@ -140,38 +124,37 @@ class DatabaseSeeder extends Seeder
                 [
                     "name" => "Dipesh Khanal",
                     "email" => "dipeshkhanal79@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "dipesh",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ],
                 [
                     "name" => "Subani Amatya",
                     "email" => "subaniwork00@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "subani",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ],
                 [
                     "name" => "Pranish Shakya",
                     "email" => "ppranish1998@gmail.com",
-                    "password" => Hash::make("password"),
                     "username" => "pranish",
-                    "created_at" => now(),
-                    "updated_at" => now()
                 ]
             ];
-
-            \App\Models\User::insert($this->users);
         }
 
         // Mail::to('')
-        foreach ($this->users as $key => $name) {
+        foreach ($this->users as $key => $item) {
+            User::firstOrCreate($item);
 //            Mail::to($this->emails[$key],$name)->send(new UserCreated($name, $this->emails[$key], $this->passwords[$key] ?? 'password'));
-            Mail::to($name['email'], $name['name'])->queue(new UserCreated($name['name'], $name['email'], 'password'));
+            Mail::to($item['email'], $item['name'])->queue(new UserCreated($item['name'], $item['email'], 'password'));
         }
         // dd($users);
+
+//        add admin role
+        Role::create([
+            'name' => 'admin',
+            'guard_name' => 'web'
+        ]);
+
+        User::where('username','achyut')->first()->assignRole('admin');
+        User::where('username','aaryan')->first()->assignRole('admin');
 
 
 
