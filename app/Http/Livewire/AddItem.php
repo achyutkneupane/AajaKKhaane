@@ -10,6 +10,7 @@ class AddItem extends Component
 {
     public $restaurant;
     public $name, $price;
+    public $items;
     public $success;
     protected $listeners = ['forAddItem' => 'updateRestaurant'];
     public function SaveItem()
@@ -28,6 +29,7 @@ class AddItem extends Component
     }
     public function render()
     {
+        $this->items = Item::all();
         return view('livewire.add-item');
     }
 }

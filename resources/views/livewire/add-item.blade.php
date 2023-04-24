@@ -17,6 +17,18 @@
                     <button type="button" class="btn btn-primary" wire:click="SaveItem">Save</button>
                 </form>
             </div>
+
+
+            <div class="mt-3">
+                <h3>Items</h3>
+                <ol class="list-group list-group-numbered">
+                    @foreach($items as $item)
+                        <li>
+                            {{ $item->name }}
+                        </li>
+                    @endforeach
+                </ol>
+            </div>
         </div>
     </div>
 </div>
