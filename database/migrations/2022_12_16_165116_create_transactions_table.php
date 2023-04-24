@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('amount');
             $table->dateTime('paid_at');
+            $table->enum('type', ['individual', 'shared']);
             $table->timestamps();
 
             $table->foreign('visit_id')->references('id')->on('visits');

@@ -26,4 +26,12 @@ class Item extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    /**
+     * Votes
+     */
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }

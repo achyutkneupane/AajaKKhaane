@@ -15,7 +15,7 @@ class Vote extends Model
     /**
      * Restaurant
      */
-    public function restaurant()
+    public function item()
     {
         return $this->belongsTo(Restaurant::class);
     }

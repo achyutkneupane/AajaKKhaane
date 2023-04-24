@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Permission Manager</div>
+                <div class="card-header">Not Eating Logs</div>
 
                 <div class="card-body">
                     <div class="list-group">
@@ -14,9 +14,11 @@
                                         <small class="text-muted">{{ $user->email }}</small>
                                     </div>
                                     <div>
-                                        {{-- button whether 'can vote' or 'cant vote' --}}
-                                        <button type="button" class="btn btn-sm {{ $user->hasPermissionTo('can vote') ? 'btn-success' : 'btn-danger' }}" wire:click="togglePermission({{ $user->id }}, 'can vote')">
-                                            {{ $user->hasPermissionTo('can vote') ? 'Can vote' : 'Can\'t vote' }}
+                                        <button type="button" class="btn btn-sm {{ $user->isRegular() ? 'btn-success' : 'btn-danger' }}" wire:click="toggleRegular({{ $user }})">
+                                            {{ $user->isRegular() ? 'Regular' : 'Not Regular' }}
+                                        </button>
+                                        <button type="button" class="btn btn-sm {{ $user->eatingToday ? 'btn-success' : 'btn-danger' }}" wire:click="toggleAbsentLog({{ $user }})">
+                                            {{ $user->eatingToday ? 'Eating' : 'Not Eating' }}
                                         </button>
                                     </div>
                                 </div>

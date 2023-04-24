@@ -57,5 +57,32 @@ class User extends Authenticatable
         return $this->hasMany(Vote::class);
     }
 
+    /**
+     * Not Eating Logs
+     */
+    public function logs()
+    {
+        return $this->hasMany(AbsentLog::class);
+    }
+
+    public function regular()
+    {
+        return $this->hasOne(Regular::class);
+    }
+
+    public function isRegular()
+    {
+        return $this->regular()->exists();
+    }
+
+    public function notEatingToday()
+    {
+        if($this->isRegular()) {
+            return $this->logs()->whereDate('absent_at', today())->exists();
+        } else {
+            return !$this->logs()->whereDate('absent_at', today())->exists();
+        }
+    }
+
 
 }
