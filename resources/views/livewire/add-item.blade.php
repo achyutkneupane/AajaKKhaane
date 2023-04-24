@@ -4,7 +4,7 @@
             <div class="card mt-3">
                 <div class="card-header">Add Item</div>
 
-                <form class="card-body">
+                <form class="card-body" wire:submit.prevent="SaveItem">
                     @if($success)
                         <div class="alert alert-success">
                             {{ $success }}
