@@ -16,6 +16,7 @@ class VoteForToday extends Component
     public $votedForToday;
     public $voteCollect;
     public $voting = false;
+    public $notEatingToggle = false;
     public $everyoneVoted = false;
 
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
@@ -41,6 +42,16 @@ class VoteForToday extends Component
         event(new \App\Events\SomeoneVoted);
         $this->voting = false;
     }
+
+    public function notEatingToday()
+    {
+        $this->notEatingToggle = true;
+        auth()->user()->logs()->create([
+            'absent_at' => now()
+        ]);
+        $this->notEatingToggle = false;
+    }
+
     public function render()
     {
         $this->items = Item::where('is_active', true)->get();
