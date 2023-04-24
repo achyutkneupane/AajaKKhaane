@@ -14,7 +14,9 @@
                                         <small class="text-muted">{{ $user->email }}</small>
                                     </div>
                                     <div>
-                                        {{-- button whether 'can vote' or 'cant vote' --}}
+                                        <button type="button" class="btn btn-sm {{ $user->isRegular() ? 'btn-success' : 'btn-danger' }}" wire:click="toggleRegular({{ $user }})">
+                                            {{ $user->isRegular() ? 'Regular' : 'Not Regular' }}
+                                        </button>
                                         <button type="button" class="btn btn-sm {{ $user->eatingToday ? 'btn-success' : 'btn-danger' }}" wire:click="toggleAbsentLog({{ $user }})">
                                             {{ $user->eatingToday ? 'Eating' : 'Not Eating' }}
                                         </button>

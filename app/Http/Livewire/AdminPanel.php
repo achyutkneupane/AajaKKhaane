@@ -28,9 +28,20 @@ class AdminPanel extends Component
         }
     }
 
+    public function toggleRegular(User $user)
+    {
+        if ($user->regular()->exists()) {
+            $user->regular()->delete();
+        } else {
+            $user->regular()->create([
+                'created_at' => today()
+            ]);
+        }
+    }
+
     public function render()
     {
-        $this->users = \App\Models\User::get()->map(function ($user) {
+        $this->users = \App\Models\User::with('logs','regular')->get()->map(function ($user) {
             $user->eatingToday = !$user->notEatingToday();
             return $user;
         });
