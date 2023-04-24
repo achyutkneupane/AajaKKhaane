@@ -28,15 +28,10 @@ class AdminPanel extends Component
         }
     }
 
-    public function notEatingToday(User $user)
-    {
-        return $user->logs()->whereDate('absent_at', today())->exists();
-    }
-
     public function render()
     {
         $this->users = \App\Models\User::get()->map(function ($user) {
-            $user->eatingToday = !$this->notEatingToday($user);
+            $user->eatingToday = !$user->notEatingToday();
             return $user;
         });
         return view('livewire.admin-panel');
