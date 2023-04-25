@@ -27,6 +27,13 @@ class AddItem extends Component
 //        success message
         $this->success = 'Item added successfully';
     }
+
+    public function deleteItem(Item $id)
+    {
+        $id->delete();
+        $this->success = 'Item deleted successfully';
+    }
+
     public function render()
     {
         $this->items = Item::all();

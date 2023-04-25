@@ -23,8 +23,8 @@
                 <h3>Items</h3>
                 <ol class="list-group list-group-numbered">
                     @foreach($items as $item)
-                        <li>
-                            {{ $item->name }}
+                        <li class="list-group-item">
+                            {{ $item->name }} (<a href="#" wire:click="deleteItem({{ $item->id }})">Delete</a>)
                         </li>
                     @endforeach
                 </ol>
