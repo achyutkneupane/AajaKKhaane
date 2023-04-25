@@ -42,13 +42,15 @@
                                     @error('item')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
-                                    <label for="item" class="form-label">Your choice</label>
-                                    <select class="form-select" aria-label="Select item" wire:model="item">
-                                        <option selected disabled value="">Select item</option>
-                                        @foreach ($items as $loopItem)
-                                            <option value="{{ $loopItem->id }}">{{ $loopItem->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div wire:ignore>
+                                        <label for="item" class="form-label">Your choice</label>
+                                        <select class="form-select" aria-label="Select item" id="select2">
+                                            <option selected disabled value="">Select item</option>
+                                            @foreach ($items as $loopItem)
+                                                <option value="{{ $loopItem->id }}">{{ $loopItem->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="form-text fs-5">
                                         प्लिज वाश योर ओन् टिफिन बक्स
                                     </div>
@@ -77,3 +79,22 @@
         </div>
     </div>
 </div>
+
+@push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const select2Elem = $('#select2');
+            select2Elem.select2();
+            select2Elem.on('change', function (e) {
+                var data = $('#select2').select2("val");
+                @this.set('item', data);
+            });
+        });
+    </script>
+@endpush
