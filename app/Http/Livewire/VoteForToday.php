@@ -16,10 +16,17 @@ class VoteForToday extends Component
     public $votedForToday;
     public $voteCollect;
     public $voting = false;
+    public $votables;
     public $notEatingToggle = false;
     public $everyoneVoted = false;
 
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
+
+    public function mount() {
+//        if absent log for today's date doesn't exist, create one with absent_at as null
+
+
+    }
 
     public function voteForToday() {
         $this->voting = true;
@@ -57,12 +64,12 @@ class VoteForToday extends Component
         $this->items = Item::where('is_active', true)->get();
         $this->votedForToday = auth()->user()->votes()->where('voted_at', '>=', today())->exists();
         $this->votesForToday = Vote::where('voted_at', '>=', today())->get();
-        $votables = User::get()->filter(function($user) {
+        $this->votables = User::get()->filter(function($user) {
             return !$user->notEatingToday();
         })->count();
 
 
-        if($this->votesForToday->count() == $votables) {
+        if($this->votesForToday->count() == $this->votables) {
             $this->everyoneVoted = true;
         }
 

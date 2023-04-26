@@ -12,10 +12,13 @@
                             </h5>
                         </div>
                     @else
+                        <div class="my-3 text-muted">
+                            Total Voters for today: {{ $votesForToday->count() }}/{{ $votables }}
+                        </div>
                         @if($everyoneVoted)
                             <div class="text-center">
                                 <h2>
-                                    Winner: <span class="text-success">{{ $voteCollect->first()['item'] }}</span> <br>
+                                    Today we are eating: <span class="text-success">{{ $voteCollect->first()['item'] }}</span> <br>
                                 </h2>
                             </div>
                         @else
