@@ -116,6 +116,7 @@ class VoteForToday extends Component
                 ]);
             }
         }
+        $this->voteCollect = $this->voteCollect->sortByDesc('votes');
         return view('livewire.vote-for-today');
     }
 }

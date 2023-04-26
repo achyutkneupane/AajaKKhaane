@@ -36,7 +36,7 @@
                             </div>
                             @if ($votedForToday)
                                 <div class="list-group">
-                                    @foreach ($voteCollect->sortByDesc('votes') as $vote)
+                                    @foreach ($voteCollect as $vote)
                                         <h5 class="mb-1">{{ $vote['item'] }}</h5>
                                         <div class="progress mb-2" style="height: 30px;">
                                             <div
