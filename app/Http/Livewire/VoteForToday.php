@@ -22,6 +22,8 @@ class VoteForToday extends Component
     public $notEatingToggle = false;
     public $everyoneVoted = false;
 
+    public $finalVotes;
+
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
 
     public function mount() {
@@ -78,6 +80,20 @@ class VoteForToday extends Component
         $this->votables = User::get()->filter(function($user) {
             return !$user->notEatingToday();
         })->count();
+
+
+        $countSeparate = $this->votesForToday->groupBy('variant');
+        $this->finalVotes = $countSeparate->map(function($item, $key) {
+            if($key == 'c') {
+                $key = 'Chicken';
+            } else {
+                $key = 'Vegetarian';
+            }
+            return [
+                'variant' => $key,
+                'votes' => $item->count()
+            ];
+        })->sortByDesc('votes');
 
 
         if($this->votesForToday->count() == $this->votables) {

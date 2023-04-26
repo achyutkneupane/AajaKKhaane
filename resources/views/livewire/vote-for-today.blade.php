@@ -12,16 +12,28 @@
                             </h5>
                         </div>
                     @else
-                        <div class="my-3 text-muted">
-                            Total Voters for today: {{ $votesForToday->count() }}/{{ $votables }}
-                        </div>
                         @if($everyoneVoted)
-                            <div class="text-center">
+                            <div class="text-center mt-3">
                                 <h2>
                                     Today we are eating: <span class="text-success">{{ $voteCollect->first()['item'] }}</span> <br>
                                 </h2>
                             </div>
+
+                            <div class="my-3 text-muted text-center">
+                                @foreach($finalVotes as $finalVote)
+                                    <div>
+                                        {{ $finalVote['variant'] }}: {{ $finalVote['votes'] }}
+                                    </div>
+                                @endforeach
+                                <div>
+                                    Total: <b>{{ $finalVotes->sum('votes') }}</b>
+                                </div>
+                            </div>
                         @else
+
+                            <div class="my-3 text-muted text-center">
+                                Total Voters for today: {{ $votesForToday->count() }}/{{ $votables }}
+                            </div>
                             @if ($votedForToday)
                                 <div class="list-group">
                                     @foreach ($voteCollect->sortByDesc('votes') as $vote)
