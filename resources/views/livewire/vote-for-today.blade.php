@@ -54,6 +54,20 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="mt-3">
+                                        <label for="variant" class="form-label">Your Variant</label>
+                                        <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" wire:model="variant" id="chicken" value="c" />
+                                                <label class="form-check-label" for="chicken">Chicken</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" wire:model="variant" id="vegetarian" value="v" />
+                                                <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                     <div class="form-text fs-5">
                                         प्लिज वाश योर ओन् टिफिन बक्स
                                     </div>

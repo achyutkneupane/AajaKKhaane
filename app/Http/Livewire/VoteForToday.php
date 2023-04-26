@@ -13,6 +13,7 @@ class VoteForToday extends Component
 {
     public $items;
     public $item = "";
+    public $variant;
     public $votesForToday;
     public $votedForToday;
     public $voteCollect;
@@ -35,7 +36,8 @@ class VoteForToday extends Component
     public function voteForToday() {
         $this->voting = true;
         $this->validate([
-            'item' => 'required|exists:items,id'
+            'item' => 'required|exists:items,id',
+            'variant' => 'required|in:c,v'
         ]);
 
         if ($this->votedForToday) {
@@ -45,10 +47,12 @@ class VoteForToday extends Component
 
         auth()->user()->votes()->create([
             'item_id' => $this->item,
-            'voted_at' => today()
+            'voted_at' => today(),
+            'variant' => $this->variant
         ]);
 
         $this->item = "";
+        $this->variant = "";
 
         event(new \App\Events\SomeoneVoted);
         $this->voting = false;
