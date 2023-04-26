@@ -90,8 +90,11 @@ class VoteForToday extends Component
                 $this->voteCollect->push([
                     'item' => $item->name,
                     'votes' => $this->votesForToday->where('item_id', $item->id)->count(),
-                    'voter_names' => $this->votesForToday->where('item_id', $item->id)->pluck('user.name')->map(function($name) {
-                        return explode(' ', $name)[0];
+                    'voter_names' => $this->votesForToday->where('item_id', $item->id)->pluck('user')->map(function($user) {
+                        $firstName = explode(' ', $user->name)[0];
+                        $variant = $this->votesForToday->where('user_id', $user->id)->first()->variant;
+                        $fullVariant = $variant == 'c' ? 'Chicken' : 'Vegetarian';
+                        return $firstName . ' (' . $fullVariant . ')';
                     })->implode(', '),
                     'percentage' => round($this->votesForToday->where('item_id', $item->id)->count() / $this->votesForToday->count() * 100, 2)
                 ]);
