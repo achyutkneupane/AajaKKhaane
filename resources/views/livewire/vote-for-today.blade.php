@@ -15,7 +15,7 @@
                         @if($everyoneVoted)
                             <div class="text-center mt-3">
                                 <h2>
-                                    Today we are eating: <span class="text-success">{{ $voteCollect->first()['item'] }}</span> <br>
+                                    Today we are eating: <span class="text-success">{{ $voteCollect->sortByDesc('percentage')->first()['item'] }}</span> <br>
                                 </h2>
                             </div>
 
@@ -36,7 +36,7 @@
                             </div>
                             @if ($votedForToday)
                                 <div class="list-group">
-                                    @foreach ($voteCollect as $vote)
+                                    @foreach ($voteCollect->sortByDesc('percentage') as $vote)
                                         <h5 class="mb-1">{{ $vote['item'] }}</h5>
                                         <div class="progress mb-2" style="height: 30px;">
                                             <div
