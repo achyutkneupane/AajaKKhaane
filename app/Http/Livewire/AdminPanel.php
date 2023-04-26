@@ -17,13 +17,51 @@ class AdminPanel extends Component
 //            $user->givePermissionTo($permission);
 //        }
 //    }
+
+    public function mount() {
+        $this->users = \App\Models\User::with('logs','regular')->get();
+        foreach($this->users as $user) {
+            $absentToday = $user->logs()->whereDate('created_at', today())->first();
+            if (!$absentToday) {
+                if($user->isRegular()) {
+                    $user->logs()->create([
+                        'created_at' => today()
+                    ]);
+                } else {
+                    $user->logs()->create([
+                        'created_at' => today(),
+                        'absent_at' => today(),
+                    ]);
+                }
+            }
+        }
+    }
     public function toggleAbsentLog(User $user)
     {
-        if ($user->logs()->whereDate('absent_at', today())->exists()) {
-            $user->logs()->whereDate('absent_at', today())->delete();
+//        if (->exists()) {
+//            $user->logs()->whereDate('absent_at', today())->update([
+//                'absent_at' => null
+//            ]);
+//        } else {
+//            $user->logs()->create([
+//                'created_at' => today()
+//            ]);
+//        }
+        $todaysLog = $user->logs()->whereDate('created_at', today());
+        if ($todaysLog->exists()) {
+            if($todaysLog->first()->absent_at) {
+                $todaysLog->update([
+                    'absent_at' => null
+                ]);
+            } else {
+                $todaysLog->update([
+                    'absent_at' => today()
+                ]);
+            }
         } else {
             $user->logs()->create([
-                'created_at' => today()
+                'created_at' => today(),
+                'absent_at' => today(),
             ]);
         }
     }
@@ -41,7 +79,7 @@ class AdminPanel extends Component
 
     public function render()
     {
-        $this->users = \App\Models\User::with('logs','regular')->get()->map(function ($user) {
+        $this->users = $this->users->map(function ($user) {
             $user->eatingToday = !$user->notEatingToday();
             return $user;
         });

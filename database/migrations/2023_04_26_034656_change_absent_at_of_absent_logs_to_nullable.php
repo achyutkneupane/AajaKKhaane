@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('absent_logs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->date('absent_at');
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('absent_logs', function (Blueprint $table) {
+            $table->date('absent_at')->nullable()->default(null)->change();
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absent_logs');
+        Schema::table('nullable', function (Blueprint $table) {
+            //
+        });
     }
 };

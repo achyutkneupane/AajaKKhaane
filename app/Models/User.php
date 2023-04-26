@@ -77,11 +77,7 @@ class User extends Authenticatable
 
     public function notEatingToday()
     {
-        if($this->isRegular()) {
-            return $this->logs()->whereDate('absent_at', today())->exists();
-        } else {
-            return !$this->logs()->whereDate('absent_at', today())->exists();
-        }
+        return $this->logs()->whereDate('created_at', today())->where('absent_at', '!=', null)->exists();
     }
 
 

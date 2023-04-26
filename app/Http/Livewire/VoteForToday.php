@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\AbsentLog;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Vote;
@@ -23,9 +24,12 @@ class VoteForToday extends Component
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
 
     public function mount() {
-//        if absent log for today's date doesn't exist, create one with absent_at as null
-
-
+        $absentToday = auth()->user()->logs()->whereDate('created_at', today())->first();
+        if (!$absentToday) {
+            auth()->user()->logs()->create([
+                'created_at' => today()
+            ]);
+        }
     }
 
     public function voteForToday() {
@@ -53,8 +57,11 @@ class VoteForToday extends Component
     public function notEatingToday()
     {
         $this->notEatingToggle = true;
-        auth()->user()->logs()->create([
-            'absent_at' => now()
+//        auth()->user()->logs()->create([
+//            'absent_at' => today()
+//        ]);
+        auth()->user()->logs()->whereDate('created_at', today())->update([
+            'absent_at' => today()
         ]);
         $this->notEatingToggle = false;
     }
