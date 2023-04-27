@@ -20,21 +20,6 @@ class AdminPanel extends Component
 
     public function mount() {
         $this->users = \App\Models\User::with('logs','regular')->get();
-        foreach($this->users as $user) {
-            $absentToday = $user->logs()->whereDate('created_at', today())->first();
-            if (!$absentToday) {
-                if($user->isRegular()) {
-                    $user->logs()->create([
-                        'created_at' => today()
-                    ]);
-                } else {
-                    $user->logs()->create([
-                        'created_at' => today(),
-                        'absent_at' => today(),
-                    ]);
-                }
-            }
-        }
     }
     public function toggleAbsentLog(User $user)
     {

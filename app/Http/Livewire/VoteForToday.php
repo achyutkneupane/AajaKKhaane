@@ -26,15 +26,6 @@ class VoteForToday extends Component
 
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
 
-    public function mount() {
-        $absentToday = auth()->user()->logs()->whereDate('created_at', today())->first();
-        if (!$absentToday) {
-            auth()->user()->logs()->create([
-                'created_at' => today()
-            ]);
-        }
-    }
-
     public function voteForToday() {
         $this->voting = true;
         $this->validate([
