@@ -99,12 +99,6 @@
                     @endif
                 </div>
             </div>
-
-            <div class="text-center mt-3">
-                @if (auth()->user()->hasRole('admin'))
-                    <a href="{{ route('admin-panel') }}" class="btn btn-link">Admin Panel</a>
-                @endif
-            </div>
         </div>
     </div>
 </div>

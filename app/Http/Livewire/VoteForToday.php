@@ -26,6 +26,31 @@ class VoteForToday extends Component
 
     protected $listeners = ['echo:someone-voted,SomeoneVoted' => '$refresh'];
 
+    public function mount()
+    {
+        $this->setAbsentForToday();
+    }
+
+    public function setAbsentForToday()
+    {
+        $users = \App\Models\User::with('logs','regular')->get();
+        foreach($users as $user) {
+            $absentToday = $user->logs()->whereDate('created_at', today())->first();
+            if (!$absentToday) {
+                if($user->isRegular()) {
+                    $user->logs()->create([
+                        'created_at' => today()
+                    ]);
+                } else {
+                    $user->logs()->create([
+                        'created_at' => today(),
+                        'absent_at' => today(),
+                    ]);
+                }
+            }
+        }
+    }
+
     public function voteForToday() {
         $this->voting = true;
         $this->validate([

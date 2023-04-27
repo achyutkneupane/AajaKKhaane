@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', AdminPanel::class)->name('admin-panel');
     Route::get('/add-item', \App\Http\Livewire\AddItem::class)->name('add-item');
+    Route::get('/add-user', \App\Http\Livewire\AddUser::class)->name('add-user');
 });
 
 // role om middleware
