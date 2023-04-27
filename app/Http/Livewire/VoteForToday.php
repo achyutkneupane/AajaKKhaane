@@ -13,7 +13,7 @@ class VoteForToday extends Component
 {
     public $items;
     public $item = "";
-    public $variant;
+    public $variant = "c";
     public $votesForToday;
     public $votedForToday;
     public $voteCollect;
@@ -28,6 +28,7 @@ class VoteForToday extends Component
 
     public function mount()
     {
+        $this->variant = auth()->user()->username == "madhavi" ? "v" : "c";
         $this->setAbsentForToday();
     }
 
