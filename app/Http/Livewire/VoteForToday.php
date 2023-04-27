@@ -2,11 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\AbsentLog;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Vote;
-use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
 
 class VoteForToday extends Component
@@ -28,8 +26,8 @@ class VoteForToday extends Component
 
     public function mount()
     {
-        $this->variant = auth()->user()->username == "madhavi" ? "v" : "c";
         $this->setAbsentForToday();
+        $this->variant = auth()->user()->username == "madhavi" ? "v" : "c";
     }
 
     public function setAbsentForToday()
@@ -80,9 +78,6 @@ class VoteForToday extends Component
     public function notEatingToday()
     {
         $this->notEatingToggle = true;
-//        auth()->user()->logs()->create([
-//            'absent_at' => today()
-//        ]);
         auth()->user()->logs()->whereDate('created_at', today())->update([
             'absent_at' => today()
         ]);

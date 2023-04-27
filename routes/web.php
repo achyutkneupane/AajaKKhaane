@@ -27,6 +27,7 @@ Auth::routes();
 // middleware auth route group
 Route::middleware(['auth'])->group(function () {
     Route::get('/vote', VoteForToday::class)->name('vote');
+    Route::get('/change-password', \App\Http\Livewire\ChangePassword::class)->name('change-password');
 });
 
 // role admin middleware
